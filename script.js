@@ -1,6 +1,6 @@
 const player = '👽'
 const computer = '💻'
-let playerPoints = 1;
+let playerPoints = 0;
 let computerPoints = 0;
 const option = prompt("Choose an option no:\n1. Play Game\n2. Exit\nPlease enter your option no: ");
 if (option === '1') {
