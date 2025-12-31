@@ -1,0 +1,158 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #e8e8ff;
+    background: radial-gradient(circle at 50% 20%, #1b1440, #0b0a1a 70%);
+    overflow: auto;
+}
+
+.game {
+    width: min(720px, 94vw);
+    text-align: center;
+    padding: 40px 24px;
+}
+
+.title {
+    font-size: clamp(1.6rem, 4vw, 2.4rem);
+    letter-spacing: 2px;
+    margin-bottom: 32px;
+    text-shadow: 0 0 18px rgba(138, 111, 255, 0.7);
+}
+
+.arena {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: 20px;
+    align-items: center;
+    margin-bottom: 28px;
+}
+
+.panel {
+    background: rgba(30, 26, 64, 0.55);
+    border: 1px solid rgba(138, 111, 255, 0.35);
+    border-radius: 20px;
+    padding: 26px 16px;
+    backdrop-filter: blur(8px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
+    transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.panel.win {
+    border-color: #ffd54a;
+    box-shadow: 0 0 28px rgba(255, 213, 74, 0.55);
+    transform: translateY(-4px);
+}
+
+.emoji {
+    font-size: 3rem;
+    filter: drop-shadow(0 0 10px rgba(138, 111, 255, 0.8));
+}
+
+.panel h2 {
+    margin: 10px 0 14px;
+    font-size: 1.2rem;
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+}
+
+.dice {
+    width: 104px;
+    height: 104px;
+    margin: 0 auto 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3.2rem;
+    border-radius: 18px;
+    background: linear-gradient(145deg, #3b3567, #221d45);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    box-shadow: inset 0 -4px 12px rgba(0, 0, 0, 0.4), 0 6px 16px rgba(0, 0, 0, 0.4);
+}
+
+.dice.shake {
+    animation: shake 0.4s ease;
+}
+
+.points {
+    font-size: 1rem;
+    color: #b6aef0;
+}
+
+.points span {
+    color: #ffd54a;
+    font-weight: 700;
+    font-size: 1.15rem;
+}
+
+.vs {
+    font-size: 1.6rem;
+    font-weight: 700;
+    background: linear-gradient(135deg, #8a6fff, #ff6fd8);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    letter-spacing: 4px;
+}
+
+.log {
+    list-style: none;
+    max-height: 220px;
+    overflow-y: auto;
+    text-align: left;
+    background: rgba(12, 10, 26, 0.7);
+    border: 1px solid rgba(138, 111, 255, 0.2);
+    border-radius: 14px;
+    padding: 8px 0;
+}
+
+.log li {
+    padding: 7px 18px;
+    font-size: 0.95rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    animation: fadeIn 0.25s ease;
+}
+
+.log li:last-child {
+    border-bottom: none;
+}
+
+.log::-webkit-scrollbar {
+    width: 6px;
+}
+
+.log::-webkit-scrollbar-thumb {
+    background: rgba(138, 111, 255, 0.45);
+    border-radius: 3px;
+}
+
+@keyframes shake {
+    0%, 100% { transform: translate(0, 0) rotate(0deg); }
+    20% { transform: translate(-6px, 2px) rotate(-8deg); }
+    40% { transform: translate(6px, -2px) rotate(8deg); }
+    60% { transform: translate(-5px, 1px) rotate(-6deg); }
+    80% { transform: translate(5px, -1px) rotate(6deg); }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-4px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 520px) {
+    .arena {
+        grid-template-columns: 1fr;
+    }
+    .vs {
+        font-size: 1.2rem;
+    }
+}

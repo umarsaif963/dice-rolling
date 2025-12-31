@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dice Duel 🎲</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <main class="game">
+        <h1 class="title">🎲 Dice Duel 🎲</h1>
+        <section class="arena">
+            <div class="panel player-panel" id="player-panel">
+                <div class="emoji">👽</div>
+                <h2>Player</h2>
+                <div class="dice" id="player-dice">❓</div>
+                <div class="points">Points: <span id="player-points">0</span></div>
+            </div>
+            <div class="vs">VS</div>
+            <div class="panel computer-panel" id="computer-panel">
+                <div class="emoji">💻</div>
+                <h2>Computer</h2>
+                <div class="dice" id="computer-dice">❓</div>
+                <div class="points">Points: <span id="computer-points">0</span></div>
+            </div>
+        </section>
+        <ol class="log" id="log"></ol>
+    </main>
+
+    <script>
+        const playerDice = document.getElementById('player-dice');
+        const computerDice = document.getElementById('computer-dice');
+        const playerPoints = document.getElementById('player-points');
+        const computerPoints = document.getElementById('computer-points');
+        const playerPanel = document.getElementById('player-panel');
+        const computerPanel = document.getElementById('computer-panel');
+        const log = document.getElementById('log');
+        const faces = ['', '⚀', '⚁', '⚂', '⚃', '⚄', '⚅'];
+
+        const addLog = (text) => {
+            const li = document.createElement('li');
+            li.textContent = text;
+            log.prepend(li);
+        };
+
+        const rollDice = (face) => {
+            const el = face === 'player' ? playerDice : computerDice;
+            el.classList.remove('shake');
+            void el.offsetWidth;
+            el.classList.add('shake');
+        };
+
+        const originalLog = console.log;
+        console.log = (...args) => {
+            originalLog(...args);
+            const text = args.join(' ');
+            addLog(text);
+            const playerMatch = text.match(/Player Dice .*?: (\d+)/);
+            const computerMatch = text.match(/Computer Dice .*?: (\d+)/);
+            const playerWin = /Player Win 1 point/.test(text);
+            const computerWin = /Computer Win 1 point/.test(text);
+            const playerWins = /Player Wins/.test(text);
+            const computerWins = /Computer Wins/.test(text);
+            if (playerMatch) {
+                rollDice('player');
+                playerDice.textContent = faces[Number(playerMatch[1])];
+            }
+            if (computerMatch) {
+                rollDice('computer');
+                computerDice.textContent = faces[Number(computerMatch[1])];
+            }
+            if (playerWin || playerWins) {
+                playerPoints.textContent = playerWin ? Number(playerPoints.textContent) + 1 : 3;
+                playerPanel.classList.add('win');
+                computerPanel.classList.remove('win');
+            }
+            if (computerWin || computerWins) {
+                computerPoints.textContent = computerWin ? Number(computerPoints.textContent) + 1 : 3;
+                computerPanel.classList.add('win');
+                playerPanel.classList.remove('win');
+            }
+            if (playerWins || computerWins) {
+                playerDice.textContent = '🏆';
+                computerDice.textContent = '🏆';
+            }
+        };
+    </script>
+    <script src="script.js"></script>
+</body>
+</html>
