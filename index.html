@@ -24,20 +24,27 @@
                 <div class="points">Points: <span id="computer-points">0</span></div>
             </div>
         </section>
+        <section class="controls">
+            <button id="roll-btn" class="btn btn-roll">🎲 Roll Dice</button>
+            <button id="reset-btn" class="btn btn-reset">🔄 Reset</button>
+        </section>
         <ol class="log" id="log"></ol>
     </main>
 
     <script>
         const playerDice = document.getElementById('player-dice');
         const computerDice = document.getElementById('computer-dice');
-        const playerPoints = document.getElementById('player-points');
-        const computerPoints = document.getElementById('computer-points');
+        const playerPointsEl = document.getElementById('player-points');
+        const computerPointsEl = document.getElementById('computer-points');
         const playerPanel = document.getElementById('player-panel');
         const computerPanel = document.getElementById('computer-panel');
         const log = document.getElementById('log');
         const faces = ['', '⚀', '⚁', '⚂', '⚃', '⚄', '⚅'];
 
+        window.prompt = () => '2';
+
         const addLog = (text) => {
+            if (text === 'Exist') return;
             const li = document.createElement('li');
             li.textContent = text;
             log.prepend(li);
@@ -70,12 +77,12 @@
                 computerDice.textContent = faces[Number(computerMatch[1])];
             }
             if (playerWin || playerWins) {
-                playerPoints.textContent = playerWin ? Number(playerPoints.textContent) + 1 : 3;
+                playerPointsEl.textContent = playerWin ? Number(playerPointsEl.textContent) + 1 : 3;
                 playerPanel.classList.add('win');
                 computerPanel.classList.remove('win');
             }
             if (computerWin || computerWins) {
-                computerPoints.textContent = computerWin ? Number(computerPoints.textContent) + 1 : 3;
+                computerPointsEl.textContent = computerWin ? Number(computerPointsEl.textContent) + 1 : 3;
                 computerPanel.classList.add('win');
                 playerPanel.classList.remove('win');
             }
@@ -84,6 +91,36 @@
                 computerDice.textContent = '🏆';
             }
         };
+
+        const rollBtn = document.getElementById('roll-btn');
+        const resetBtn = document.getElementById('reset-btn');
+
+        rollBtn.addEventListener('click', () => {
+            rollBtn.disabled = true;
+            setTimeout(() => {
+                game();
+                if (playerPoints === 3) {
+                    console.log('Player Wins🎉!');
+                } else if (computerPoints === 3) {
+                    console.log('Computer Wins🎉!');
+                } else {
+                    rollBtn.disabled = false;
+                }
+            }, 450);
+        });
+
+        resetBtn.addEventListener('click', () => {
+            playerPoints = 0;
+            computerPoints = 0;
+            playerPointsEl.textContent = '0';
+            computerPointsEl.textContent = '0';
+            playerDice.textContent = '❓';
+            computerDice.textContent = '❓';
+            playerPanel.classList.remove('win');
+            computerPanel.classList.remove('win');
+            log.innerHTML = '';
+            rollBtn.disabled = false;
+        });
     </script>
     <script src="script.js"></script>
 </body>
