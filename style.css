@@ -21,7 +21,7 @@ body {
 }
 
 .game {
-    width: min(640px, 100%);
+    width: min(900px, 100%);
     text-align: center;
 }
 
@@ -38,7 +38,8 @@ body {
 
 .arena {
     display: grid;
-    grid-template-columns: 1fr auto 0.5fr auto 1fr;
+    grid-template-columns: auto auto auto auto auto;
+    justify-content: center;
     gap: 14px;
     align-items: start;
     margin-bottom: 30px;
@@ -46,6 +47,7 @@ body {
 
 .panel {
     position: relative;
+    width: 210px;
     border: 3px solid #2b2b2b;
     border-radius: 16px 16px 20px 20px;
     padding: 34px 14px 22px;
@@ -151,7 +153,7 @@ body {
 }
 
 .feed {
-    min-width: 0;
+    min-width: 230px;
 }
 
 .feed-title {
@@ -237,8 +239,6 @@ body {
 
 .log {
     list-style: none;
-    max-height: 200px;
-    overflow-y: auto;
     display: flex;
     flex-direction: column;
     gap: 6px;

@@ -97,9 +97,16 @@ function game() {
 const rollBtn = document.getElementById('roll-btn');
 const resetBtn = document.getElementById('reset-btn');
 
+const clearLogs = () => {
+    playerLog.innerHTML = '';
+    computerLog.innerHTML = '';
+    centerLog.innerHTML = '';
+};
+
 rollBtn.addEventListener('click', () => {
     rollBtn.disabled = true;
     setTimeout(() => {
+        clearLogs();
         game();
         if (playerPoints === 3) {
             console.log('Player Wins🎉!');
@@ -122,8 +129,6 @@ resetBtn.addEventListener('click', () => {
     computerDice.textContent = '❓';
     playerPanel.classList.remove('win');
     computerPanel.classList.remove('win');
-    playerLog.innerHTML = '';
-    computerLog.innerHTML = '';
-    centerLog.innerHTML = '';
+    clearLogs();
     rollBtn.disabled = false;
 });
