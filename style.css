@@ -38,8 +38,8 @@ body {
 
 .arena {
     display: grid;
-    grid-template-columns: 1fr auto 1fr;
-    gap: 18px 10px;
+    grid-template-columns: 1fr auto 0.5fr auto 1fr;
+    gap: 14px;
     align-items: start;
     margin-bottom: 30px;
 }
@@ -150,6 +150,26 @@ body {
     padding: 6px 4px;
 }
 
+.feed {
+    min-width: 0;
+}
+
+.feed-title {
+    font-size: 1.4rem;
+    margin-bottom: 8px;
+    color: #2b2b2b;
+}
+
+.feed-title.player {
+    transform: rotate(-4deg);
+    text-align: left;
+}
+
+.feed-title.computer {
+    transform: rotate(4deg);
+    text-align: right;
+}
+
 .controls {
     display: flex;
     justify-content: center;
@@ -205,34 +225,14 @@ body {
     box-shadow: 2px 2px 0 rgba(43, 43, 43, 0.6);
 }
 
-.results {
-    display: grid;
-    grid-template-columns: 1.2fr 0.6fr 1.2fr;
-    gap: 14px;
-    align-items: start;
+.draw-area {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
 }
 
-.feed {
-    min-width: 0;
-}
-
-.feed-title {
-    font-size: 1rem;
-    font-weight: 700;
-    margin-bottom: 8px;
-    color: #2b2b2b;
-}
-
-.feed-title.player {
-    transform: rotate(-1.5deg);
-}
-
-.feed-title.computer {
-    transform: rotate(1.5deg);
-}
-
-.feed-draw .feed-title {
-    font-size: 1.3rem;
+.draw-area .feed {
+    width: min(300px, 60%);
 }
 
 .log {
@@ -324,14 +324,55 @@ body {
     100% { transform: scale(1) rotate(0deg); opacity: 1; }
 }
 
+@media (max-width: 720px) {
+    .arena {
+        grid-template-columns: 1fr auto 1fr;
+    }
+    .arena .feed:first-child {
+        grid-column: 1 / -1;
+        grid-row: 1;
+    }
+    .arena .feed:last-child {
+        grid-column: 1 / -1;
+        grid-row: 3;
+    }
+    .player-panel {
+        grid-column: 1;
+        grid-row: 2;
+    }
+    .vs {
+        grid-column: 2;
+        grid-row: 2;
+        transform: rotate(-4deg);
+    }
+    .computer-panel {
+        grid-column: 3;
+        grid-row: 2;
+    }
+    .feed {
+        order: 0;
+    }
+    .log {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        max-height: none;
+    }
+    .computer-log,
+    .player-log {
+        align-items: center;
+        text-align: center;
+    }
+}
+
 @media (max-width: 520px) {
     .arena {
         grid-template-columns: 1fr;
         gap: 26px 0;
     }
-    .results {
-        grid-template-columns: 1fr;
-        gap: 18px;
+    .vs {
+        grid-column: 1;
+        grid-row: auto;
     }
     .vs {
         transform: rotate(-4deg);

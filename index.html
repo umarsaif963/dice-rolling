@@ -10,6 +10,10 @@
     <main class="game">
         <h1 class="title">🎲 Dice Duel 🎲</h1>
         <section class="arena">
+            <div class="feed">
+                <div class="feed-title player">👽</div>
+                <ol class="log player-log" id="player-log"></ol>
+            </div>
             <div class="panel player-panel" id="player-panel">
                 <div class="emoji">👽</div>
                 <h2>Player</h2>
@@ -23,25 +27,21 @@
                 <div class="dice" id="computer-dice">❓</div>
                 <div class="points">Points: <span id="computer-points">0</span></div>
             </div>
+            <div class="feed">
+                <div class="feed-title computer">💻</div>
+                <ol class="log computer-log" id="computer-log"></ol>
+            </div>
         </section>
         <section class="controls">
             <button id="roll-btn" class="btn btn-roll">🎲 Roll Dice</button>
             <button id="reset-btn" class="btn btn-reset">🔄 Reset</button>
         </section>
-        <section class="results">
-            <div class="feed">
-                <div class="feed-title player">👽 Player</div>
-                <ol class="log player-log" id="player-log"></ol>
-            </div>
+        <div class="draw-area">
             <div class="feed feed-draw">
                 <div class="feed-title">🤧</div>
                 <ol class="log center-log" id="center-log"></ol>
             </div>
-            <div class="feed">
-                <div class="feed-title computer">💻 Computer</div>
-                <ol class="log computer-log" id="computer-log"></ol>
-            </div>
-        </section>
+        </div>
     </main>
 
     <script src="script.js"></script>
