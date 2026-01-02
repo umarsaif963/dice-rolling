@@ -205,39 +205,95 @@ body {
     box-shadow: 2px 2px 0 rgba(43, 43, 43, 0.6);
 }
 
+.results {
+    display: grid;
+    grid-template-columns: 1.2fr 0.6fr 1.2fr;
+    gap: 14px;
+    align-items: start;
+}
+
+.feed {
+    min-width: 0;
+}
+
+.feed-title {
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: 8px;
+    color: #2b2b2b;
+}
+
+.feed-title.player {
+    transform: rotate(-1.5deg);
+}
+
+.feed-title.computer {
+    transform: rotate(1.5deg);
+}
+
+.feed-draw .feed-title {
+    font-size: 1.3rem;
+}
+
 .log {
     list-style: none;
     max-height: 200px;
     overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding: 8px;
     text-align: left;
-    background: repeating-linear-gradient(
-        180deg,
-        #fefefe 0px,
-        #fefefe 26px,
-        #d8e7fb 26px,
-        #d8e7fb 27px
-    );
-    border: 3px solid #2b2b2b;
-    border-radius: 8px;
-    padding: 6px 4px;
-    box-shadow: 4px 4px 0 rgba(43, 43, 43, 0.9);
+}
+
+.player-log {
+    align-items: flex-start;
+    border-top: 3px dashed #7dd3fc;
+}
+
+.computer-log {
+    align-items: flex-end;
+    text-align: right;
+    border-top: 3px dashed #f9a8d4;
+}
+
+.center-log {
+    align-items: center;
+    border-top: 3px dashed #fdba74;
 }
 
 .log li {
-    padding: 3px 14px;
-    font-size: 0.98rem;
-    line-height: 26px;
-    border-bottom: 1px dashed rgba(43, 43, 43, 0.2);
+    display: inline-block;
+    max-width: 100%;
+    padding: 3px 12px;
+    font-size: 0.95rem;
+    background: #ffffff;
+    border: 2px solid #2b2b2b;
+    border-radius: 999px;
+    box-shadow: 2px 2px 0 rgba(43, 43, 43, 0.8);
+    word-break: break-word;
     animation: fadeIn 0.25s ease;
 }
 
-.log li:last-child {
-    border-bottom: none;
+.player-log li {
+    transform: rotate(-1deg);
 }
 
-.log li:first-child {
+.computer-log li {
+    transform: rotate(1deg);
+}
+
+.center-log li {
+    font-style: italic;
+    font-size: 0.82rem;
+    background: #fdba74;
+    padding: 2px 10px;
+}
+
+.log li.gold {
+    background: #fef08a;
     font-weight: 700;
-    background: #fff3b0;
+    animation: pop 0.3s ease;
 }
 
 .log::-webkit-scrollbar {
@@ -262,10 +318,20 @@ body {
     to { opacity: 1; transform: translateY(0); }
 }
 
+@keyframes pop {
+    0%   { transform: scale(0.5) rotate(-4deg); opacity: 0; }
+    60%  { transform: scale(1.12) rotate(2deg); }
+    100% { transform: scale(1) rotate(0deg); opacity: 1; }
+}
+
 @media (max-width: 520px) {
     .arena {
         grid-template-columns: 1fr;
         gap: 26px 0;
+    }
+    .results {
+        grid-template-columns: 1fr;
+        gap: 18px;
     }
     .vs {
         transform: rotate(-4deg);

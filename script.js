@@ -9,13 +9,26 @@ const playerPointsEl = document.getElementById('player-points');
 const computerPointsEl = document.getElementById('computer-points');
 const playerPanel = document.getElementById('player-panel');
 const computerPanel = document.getElementById('computer-panel');
-const log = document.getElementById('log');
+const playerLog = document.getElementById('player-log');
+const computerLog = document.getElementById('computer-log');
+const centerLog = document.getElementById('center-log');
 const faces = ['', '⚀', '⚁', '⚂', '⚃', '⚄', '⚅'];
 
 const addLog = (text) => {
     const li = document.createElement('li');
     li.textContent = text;
-    log.prepend(li);
+    if (/Wins/.test(text)) {
+        li.className = 'gold';
+    }
+    if (text.startsWith('Player')) {
+        playerLog.prepend(li);
+    }
+    else if (text.startsWith('Computer')) {
+        computerLog.prepend(li);
+    }
+    else {
+        centerLog.prepend(li);
+    }
 };
 
 const rollDice = (face) => {
@@ -109,6 +122,8 @@ resetBtn.addEventListener('click', () => {
     computerDice.textContent = '❓';
     playerPanel.classList.remove('win');
     computerPanel.classList.remove('win');
-    log.innerHTML = '';
+    playerLog.innerHTML = '';
+    computerLog.innerHTML = '';
+    centerLog.innerHTML = '';
     rollBtn.disabled = false;
 });

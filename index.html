@@ -28,7 +28,20 @@
             <button id="roll-btn" class="btn btn-roll">🎲 Roll Dice</button>
             <button id="reset-btn" class="btn btn-reset">🔄 Reset</button>
         </section>
-        <ol class="log" id="log"></ol>
+        <section class="results">
+            <div class="feed">
+                <div class="feed-title player">👽 Player</div>
+                <ol class="log player-log" id="player-log"></ol>
+            </div>
+            <div class="feed feed-draw">
+                <div class="feed-title">🤧</div>
+                <ol class="log center-log" id="center-log"></ol>
+            </div>
+            <div class="feed">
+                <div class="feed-title computer">💻 Computer</div>
+                <ol class="log computer-log" id="computer-log"></ol>
+            </div>
+        </section>
     </main>
 
     <script src="script.js"></script>
