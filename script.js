@@ -68,8 +68,14 @@ console.log = (...args) => {
         playerPanel.classList.remove('win');
     }
     if (playerWins || computerWins) {
-        playerDice.textContent = '🏆';
-        computerDice.textContent = '🏆';
+        if (playerWins) {
+            playerDice.textContent = '🏆';
+            computerDice.textContent = '😞';
+        }
+        else {
+            computerDice.textContent = '🏆';
+            playerDice.textContent = '😞';
+        }
     }
 };
 
